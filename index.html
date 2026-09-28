@@ -863,7 +863,7 @@ function CoachIA() {
       });
       const data = await res.json();
       const fallback = lang === 'pt' ? `Olá ${nameInput.trim()}! Como posso ajudar?` : `Hello ${nameInput.trim()}! How can I help?`;
-      const reply = data.content?.[0]?.text
+      const reply = data.content?.find(b => b.type === 'text')?.text
         || (data.error ? `[DEBUG] ${JSON.stringify(data.error)}` : fallback);
       setMessages([
         { role: "user", content: initMsg, hidden: true },
@@ -900,7 +900,7 @@ function CoachIA() {
       });
       const data = await res.json();
       const errReply = lang === 'pt' ? "Não consegui responder. Tenta novamente." : "Could not respond. Please try again.";
-      const reply = data.content?.[0]?.text
+      const reply = data.content?.find(b => b.type === 'text')?.text
         || `${errReply} [DEBUG] status=${res.status} ${JSON.stringify(data)}`;
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (e) {
