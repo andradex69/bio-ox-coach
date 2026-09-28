@@ -883,7 +883,7 @@ function CoachIA() {
     const newMessages = [...messages, { role: "user", content: userMsg }];
     setMessages(newMessages);
     setLoading(true);
-    const apiMessages = newMessages.filter(m => !m.hidden).map(m => ({ role: m.role, content: m.content }));
+    const apiMessages = newMessages.map(m => ({ role: m.role, content: m.content }));
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/chat-proxy`, {
         method: "POST",
@@ -900,11 +900,12 @@ function CoachIA() {
       });
       const data = await res.json();
       const errReply = lang === 'pt' ? "Não consegui responder. Tenta novamente." : "Could not respond. Please try again.";
-      const reply = data.content?.[0]?.text || errReply;
+      const reply = data.content?.[0]?.text
+        || (data.error ? `${errReply} [DEBUG] ${JSON.stringify(data.error)}` : errReply);
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (e) {
       const connErr = lang === 'pt' ? "Erro de ligação. Tenta novamente." : "Connection error. Please try again.";
-      setMessages(prev => [...prev, { role: "assistant", content: connErr }]);
+      setMessages(prev => [...prev, { role: "assistant", content: `${connErr} [DEBUG] ${e && e.message ? e.message : String(e)}` }]);
     }
     setLoading(false);
   };
