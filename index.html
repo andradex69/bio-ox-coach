@@ -46,7 +46,8 @@ const BRAND_LIGHT = "#f0f6ff";
 const BRAND_MID = "#d4e6f7";
 const CYAN = "#00d4e8";
 
-const HOTMART_LINK = "https://hotmart.com/product/bio-ox-consultadoria"; // substituir pelo link real
+const HOTMART_LINK = "https://pay.hotmart.com/Y104799426D?bid=1790630916700"; // checkout consultadoria - Brasil
+const STRIPE_LINK = ""; // TODO: Payment Link do Stripe - Europa/resto do mundo (ainda por definir)
 
 const SUPABASE_URL = "https://iqtqozqjsqidtycduzcf.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlxdHFvenFqc3FpZHR5Y2R1emNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2MTI3ODEsImV4cCI6MjEwNjE4ODc4MX0.nVHxkVJPUbZyzWQSiGXFu8Zn10gVAhZy6KFIvb25Bpk";
@@ -925,6 +926,8 @@ function CoachIA() {
     ? getMatchedTestimonials(allSelectedKeywords)
     : ALL_TESTIMONIALS;
 
+  const consultLink = isBrasil ? HOTMART_LINK : (STRIPE_LINK || HOTMART_LINK);
+
   const ctaConfig = {
     consultPrice: isBrasil ? L.consultPriceBrasil : L.consultPriceEurope,
     links: isBrasil
@@ -1485,7 +1488,7 @@ function CoachIA() {
                 <span style={{ fontSize: "13px", color: "#7aaad0" }}>{L.ctaConsultSession}</span>
               </div>
               <a
-                href={HOTMART_LINK}
+                href={consultLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
