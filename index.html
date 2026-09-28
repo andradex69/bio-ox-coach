@@ -901,7 +901,7 @@ function CoachIA() {
       const data = await res.json();
       const errReply = lang === 'pt' ? "Não consegui responder. Tenta novamente." : "Could not respond. Please try again.";
       const reply = data.content?.[0]?.text
-        || (data.error ? `${errReply} [DEBUG] ${JSON.stringify(data.error)}` : errReply);
+        || `${errReply} [DEBUG] status=${res.status} ${JSON.stringify(data)}`;
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (e) {
       const connErr = lang === 'pt' ? "Erro de ligação. Tenta novamente." : "Connection error. Please try again.";
