@@ -202,15 +202,19 @@ const LANGS = {
     ctaLabel: "O teu próximo passo",
     ctaTitle: "Escolhe como queres começar a trabalhar a causa",
     ctaPopular: "Mais popular",
+    ctaTalkLabel: "Recomendado",
+    ctaTalkTitle: "Fala comigo sobre o teu resultado",
+    ctaTalkDesc: "Conta-me o teu caso por WhatsApp e digo-te por onde começar. Sem compromisso.",
+    ctaOrConsult: "Já sabes que queres avançar? Marca a consultadoria:",
     ctaConsultTitle: "Consultadoria com o Nuno",
     ctaConsultDesc: "Análise do teu caso específico e protocolo personalizado. Sais com um caminho concreto numa sessão completa.",
     ctaConsultSession: "/ sessão completa",
     ctaConsultBtn: "Quero a Consultadoria →",
     ctaSupTitle: "Suplementação Antioxidante",
     ctaSupDesc: "Suplementos com Ginseng Panax, Ginkgo Biloba e Óleo de Cominho Negro, ingredientes estudados para inflamação crónica e stress oxidativo.",
-    waBtn: "💬 Falar directamente com o Nuno",
-    waSubBtn: "Tens dúvidas? Fala comigo primeiro →",
-    waMsg: (name, complaints, score) => `Olá Nuno! Acabei de fazer o score BIO-OX.%0A%0ANome: ${name}%0AProblemas: ${complaints}%0AScore: ${score}%0A%0AGostava de saber mais sobre a consultadoria.`,
+    waBtn: "💬 Falar com o Nuno no WhatsApp",
+    waSubBtn: "Respondo pessoalmente a cada mensagem",
+    waMsg: (name, complaints, score) => `Olá Nuno! Acabei de fazer o score BIO-OX.%0A%0ANome: ${name}%0AProblemas: ${complaints}%0AScore: ${score}%0A%0AGostava de falar sobre o meu resultado.`,
     chatBtn: "Tenho dúvidas — falar com o assistente",
     chatBtnResume: "Voltar à conversa →",
     ctaBackBtn: "Ver consultadoria e suplementos →",
@@ -467,15 +471,19 @@ Exemplo de abordagem: "Percebo — e o acompanhamento médico especializado é e
     ctaLabel: "Your next step",
     ctaTitle: "Choose how you want to start working on the cause",
     ctaPopular: "Most popular",
+    ctaTalkLabel: "Recommended",
+    ctaTalkTitle: "Talk to me about your result",
+    ctaTalkDesc: "Tell me about your case on WhatsApp and I'll tell you where to start. No commitment.",
+    ctaOrConsult: "Already know you want to go ahead? Book the consultancy:",
     ctaConsultTitle: "Consultancy with Nuno",
     ctaConsultDesc: "Analysis of your specific case and personalised protocol. You leave one complete session with a concrete path forward.",
     ctaConsultSession: "/ complete session",
     ctaConsultBtn: "I want the Consultancy →",
     ctaSupTitle: "Antioxidant Supplementation",
     ctaSupDesc: "Supplements with Panax Ginseng, Ginkgo Biloba and Black Seed Oil, ingredients studied for chronic inflammation and oxidative stress.",
-    waBtn: "💬 Talk directly with Nuno",
-    waSubBtn: "Have questions? Talk to me first →",
-    waMsg: (name, complaints, score) => `Hi Nuno! I just completed the BIO-OX score.%0A%0AName: ${name}%0AProblems: ${complaints}%0AScore: ${score}%0A%0AI'd like to know more about the consultancy.`,
+    waBtn: "💬 Talk to Nuno on WhatsApp",
+    waSubBtn: "I reply personally to every message",
+    waMsg: (name, complaints, score) => `Hi Nuno! I just completed the BIO-OX score.%0A%0AName: ${name}%0AProblems: ${complaints}%0AScore: ${score}%0A%0AI'd like to talk about my result.`,
     chatBtn: "I have questions — talk to the assistant",
     chatBtnResume: "Back to conversation →",
     ctaBackBtn: "See consultancy and supplements →",
@@ -1644,45 +1652,24 @@ function CoachIA() {
               </h3>
             </div>
 
-            {/* Consultancy card */}
+            {/* Talk to Nuno card (main CTA) + consultancy (secondary) */}
             <div style={{
               width: "100%", maxWidth: "340px",
               background: `linear-gradient(135deg, ${BRAND_DARK}, #0d2a47)`,
               borderRadius: "16px", padding: "22px 20px",
               boxShadow: "0 6px 24px rgba(26,58,92,0.3)",
             }}>
-              <div style={{ marginBottom: "12px" }}>
+              <div style={{ marginBottom: "10px" }}>
                 <div style={{ fontSize: "10px", color: CYAN, fontWeight: "700", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "4px" }}>
-                  {L.ctaPopular}
+                  {L.ctaTalkLabel}
                 </div>
                 <div style={{ fontSize: "17px", fontWeight: "700", color: "#ffffff", lineHeight: 1.3 }}>
-                  {L.ctaConsultTitle}
+                  {L.ctaTalkTitle}
                 </div>
               </div>
               <p style={{ fontSize: "13px", color: "#b8d4f0", lineHeight: 1.65, margin: "0 0 16px" }}>
-                {L.ctaConsultDesc}
+                {L.ctaTalkDesc}
               </p>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "16px" }}>
-                <span style={{ fontSize: "28px", fontWeight: "800", color: CYAN }}>{ctaConfig.consultPrice}</span>
-                <span style={{ fontSize: "13px", color: "#7aaad0" }}>{L.ctaConsultSession}</span>
-              </div>
-              <a
-                href={consultLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "block", width: "100%", padding: "14px",
-                  background: CYAN,
-                  borderRadius: "10px",
-                  color: BRAND_DARK, fontSize: "14px",
-                  fontFamily: "inherit", fontWeight: "700",
-                  textDecoration: "none", textAlign: "center",
-                  boxShadow: `0 4px 14px ${CYAN}50`,
-                  boxSizing: "border-box",
-                }}
-              >
-                {L.ctaConsultBtn}
-              </a>
               <a
                 href={`https://wa.me/351918977205?text=${L.waMsg(nameInput.trim(), complaintsLabelLang || (lang === "en" ? "not specified" : "não especificado"), totalScore)}`}
                 target="_blank"
@@ -1697,23 +1684,60 @@ function CoachIA() {
                 })}
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
-                  width: "100%", padding: "13px",
+                  width: "100%", padding: "15px",
                   background: "#25D366",
                   borderRadius: "10px",
-                  color: "#ffffff", fontSize: "14px",
+                  color: "#ffffff", fontSize: "15px",
                   fontFamily: "inherit", fontWeight: "700",
                   textDecoration: "none", textAlign: "center",
-                  marginTop: "10px",
                   boxSizing: "border-box",
                   boxShadow: "0 4px 14px rgba(37,211,102,0.4)",
                 }}
               >
                 {L.waBtn}
               </a>
-              <div style={{ textAlign: "center", marginTop: "4px" }}>
+              <div style={{ textAlign: "center", marginTop: "6px" }}>
                 <span style={{ fontSize: "11px", color: "#7aaad0" }}>
                   {L.waSubBtn}
                 </span>
+              </div>
+
+              <div style={{ borderTop: "1px solid rgba(184,212,240,0.2)", marginTop: "18px", paddingTop: "16px" }}>
+                <p style={{ fontSize: "12px", color: "#b8d4f0", lineHeight: 1.5, margin: "0 0 8px" }}>
+                  {L.ctaOrConsult}
+                </p>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "4px" }}>
+                  <span style={{ fontSize: "14px", fontWeight: "700", color: "#ffffff" }}>{L.ctaConsultTitle}</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "12px" }}>
+                  <span style={{ fontSize: "20px", fontWeight: "800", color: CYAN }}>{ctaConfig.consultPrice}</span>
+                  <span style={{ fontSize: "12px", color: "#7aaad0" }}>{L.ctaConsultSession}</span>
+                </div>
+                <a
+                  href={consultLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => saveLead({
+                    session_id: sessionId,
+                    stage: "consult_click",
+                    name: nameInput.trim(),
+                    email: emailInput.trim(),
+                    score: totalScore,
+                    lang: lang,
+                  })}
+                  style={{
+                    display: "block", width: "100%", padding: "12px",
+                    background: "transparent",
+                    border: `1.5px solid ${CYAN}`,
+                    borderRadius: "10px",
+                    color: CYAN, fontSize: "14px",
+                    fontFamily: "inherit", fontWeight: "700",
+                    textDecoration: "none", textAlign: "center",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  {L.ctaConsultBtn}
+                </a>
               </div>
             </div>
 
@@ -1741,6 +1765,14 @@ function CoachIA() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => saveLead({
+                      session_id: sessionId,
+                      stage: "supplement_click",
+                      name: nameInput.trim(),
+                      email: emailInput.trim(),
+                      score: totalScore,
+                      lang: lang,
+                    })}
                     style={{
                       display: "block", padding: "13px 16px",
                       background: BRAND_LIGHT,
