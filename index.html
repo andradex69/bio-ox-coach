@@ -218,7 +218,7 @@ const LANGS = {
     ],
     ctaConsultBtn: "Quero a Consultadoria →",
     ctaSupTitle: "Suplementação Antioxidante",
-    ctaSupDesc: "Suplementos com Ginseng Panax, Ginkgo Biloba e Óleo de Cominho Negro, ingredientes estudados para inflamação crónica e stress oxidativo.",
+    ctaSupDesc: "",
     waBtn: "💬 Falar com o Nuno no WhatsApp",
     waSubBtn: "Respondo pessoalmente a cada mensagem",
     waMsg: (name, complaints, score) => `Olá Nuno! Acabei de fazer o score BIO-OX.%0A%0ANome: ${name}%0AProblemas: ${complaints}%0AScore: ${score}%0A%0AGostava de falar sobre o meu resultado.`,
@@ -233,10 +233,10 @@ const LANGS = {
     scoreDisclaimer: "Este score é um indicador baseado em hábitos e sintomas. Não é um diagnóstico médico nem uma medição laboratorial.",
     chatDisclaimer: "Este assistente não substitui aconselhamento médico",
     ctaDisclaimer: "Este assistente não substitui aconselhamento médico.",
-    iherb: { label: "🛒 iHerb — Suplementos", sub: "Pesquisa: Panax Ginseng, Ginkgo Biloba, Black Seed Oil" },
-    newhope: { label: "✨ Refine — o suplemento que eu uso", sub: "Ginkgo + Ginseng · oferta: consulta de 15 min" },
-    dxnCoffee: { label: "☕ Lingzhi Black Coffee DXN", sub: "Café com extrato de Ganoderma (Lingzhi)" },
-    iherbBrasil: { label: "🛒 iHerb — Suplementos", sub: "Pesquisa: Panax Ginseng, Ginkgo Biloba, Black Seed Oil" },
+    iherb: { label: "🛒 iHerb — Suplementos", sub: "" },
+    newhope: { label: "✨ Refine — o suplemento que eu uso", sub: "" },
+    dxnCoffee: { label: "☕ Lingzhi Black Coffee DXN", sub: "" },
+    iherbBrasil: { label: "🛒 iHerb — Suplementos", sub: "" },
     consultPriceEurope: "99€",
     consultPriceBrasil: "350 Reais",
     isBrasilCountry: (c) => c === "Brasil",
@@ -495,7 +495,7 @@ Exemplo de abordagem: "Percebo — e o acompanhamento médico especializado é e
     ],
     ctaConsultBtn: "I want the Consultancy →",
     ctaSupTitle: "Antioxidant Supplementation",
-    ctaSupDesc: "Supplements with Panax Ginseng, Ginkgo Biloba and Black Seed Oil, ingredients studied for chronic inflammation and oxidative stress.",
+    ctaSupDesc: "",
     waBtn: "💬 Talk to Nuno on WhatsApp",
     waSubBtn: "I reply personally to every message",
     waMsg: (name, complaints, score) => `Hi Nuno! I just completed the BIO-OX score.%0A%0AName: ${name}%0AProblems: ${complaints}%0AScore: ${score}%0A%0AI'd like to talk about my result.`,
@@ -510,10 +510,10 @@ Exemplo de abordagem: "Percebo — e o acompanhamento médico especializado é e
     scoreDisclaimer: "This score is an indicator based on habits and symptoms. It is not a medical diagnosis or laboratory measurement.",
     chatDisclaimer: "This assistant does not replace medical advice",
     ctaDisclaimer: "This assistant does not replace medical advice.",
-    iherb: { label: "🛒 iHerb — Supplements", sub: "Search: Panax Ginseng, Ginkgo Biloba, Black Seed Oil" },
-    newhope: { label: "✨ Refine — the supplement I use", sub: "Ginkgo + Ginseng · offer: 15-min consultation" },
-    dxnCoffee: { label: "☕ DXN Lingzhi Black Coffee", sub: "Coffee with Ganoderma (Lingzhi) extract" },
-    iherbBrasil: { label: "🛒 iHerb — Supplements", sub: "Search: Panax Ginseng, Ginkgo Biloba, Black Seed Oil" },
+    iherb: { label: "🛒 iHerb — Supplements", sub: "" },
+    newhope: { label: "✨ Refine — the supplement I use", sub: "" },
+    dxnCoffee: { label: "☕ DXN Lingzhi Black Coffee", sub: "" },
+    iherbBrasil: { label: "🛒 iHerb — Supplements", sub: "" },
     consultPriceEurope: "€99",
     consultPriceBrasil: "350 BRL",
     isBrasilCountry: (c) => c === "Brazil",
@@ -1780,9 +1780,11 @@ function CoachIA() {
                 <div style={{ fontSize: "17px", fontWeight: "700", color: BRAND_DARK, marginBottom: "6px" }}>
                   {L.ctaSupTitle}
                 </div>
+                {L.ctaSupDesc && (
                 <p style={{ fontSize: "13px", color: "#5a7a9a", lineHeight: 1.65, margin: 0 }}>
                   {L.ctaSupDesc}
                 </p>
+                )}
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 {ctaConfig.links.map((link, i) => (
@@ -1811,7 +1813,7 @@ function CoachIA() {
                     }}
                   >
                     <div>{link.label}</div>
-                    <div style={{ fontSize: "11px", color: "#8aaccc", fontWeight: "400", marginTop: "2px" }}>{link.sub}</div>
+                    {link.sub && <div style={{ fontSize: "11px", color: "#8aaccc", fontWeight: "400", marginTop: "2px" }}>{link.sub}</div>}
                   </a>
                 ))}
               </div>
