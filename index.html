@@ -209,6 +209,13 @@ const LANGS = {
     ctaConsultTitle: "Consultadoria com o Nuno",
     ctaConsultDesc: "Análise do teu caso específico e protocolo personalizado. Sais com um caminho concreto numa sessão completa.",
     ctaConsultSession: "/ sessão completa",
+    consultHowTitle: "Como funciona",
+    consultSteps: [
+      ["Antes da sessão", "envias-me as tuas análises ou outros exames recentes e a lista da medicação que tomas."],
+      ["Na sessão (videochamada por Meet, Zoom ou WhatsApp)", "analisamos a fundo o teu caso, incluindo as possíveis causas emocionais. Explico-te o protocolo durante a sessão."],
+      ["Depois da sessão", "recebes o teu protocolo personalizado por escrito: alimentação, suplementação, hábitos diários e, se o teu caso precisar, recomendações de outros profissionais ou terapias."],
+      ["Acompanhamento (opcional)", "se quiseres, revemos os resultados mais tarde e ajustamos o protocolo, com custo extra."],
+    ],
     ctaConsultBtn: "Quero a Consultadoria →",
     ctaSupTitle: "Suplementação Antioxidante",
     ctaSupDesc: "Suplementos com Ginseng Panax, Ginkgo Biloba e Óleo de Cominho Negro, ingredientes estudados para inflamação crónica e stress oxidativo.",
@@ -479,6 +486,13 @@ Exemplo de abordagem: "Percebo — e o acompanhamento médico especializado é e
     ctaConsultTitle: "Consultancy with Nuno",
     ctaConsultDesc: "Analysis of your specific case and personalised protocol. You leave one complete session with a concrete path forward.",
     ctaConsultSession: "/ complete session",
+    consultHowTitle: "How it works",
+    consultSteps: [
+      ["Before the session", "you send me your recent blood tests or other exams and the list of medication you take."],
+      ["During the session (video call on Meet, Zoom or WhatsApp)", "we look deeply into your case, including possible emotional causes. I explain the protocol to you during the session."],
+      ["After the session", "you receive your personalised protocol in writing: diet, supplementation, daily habits and, if your case needs it, recommendations for other professionals or therapies."],
+      ["Follow-up (optional)", "if you want, we review your results later and adjust the protocol, at an extra cost."],
+    ],
     ctaConsultBtn: "I want the Consultancy →",
     ctaSupTitle: "Antioxidant Supplementation",
     ctaSupDesc: "Supplements with Panax Ginseng, Ginkgo Biloba and Black Seed Oil, ingredients studied for chronic inflammation and oxidative stress.",
@@ -1711,6 +1725,15 @@ function CoachIA() {
                 </p>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "4px" }}>
                   <span style={{ fontSize: "14px", fontWeight: "700", color: "#ffffff" }}>{L.ctaConsultTitle}</span>
+                </div>
+                <div style={{ margin: "8px 0 14px" }}>
+                  <div style={{ fontSize: "12px", fontWeight: "700", color: "#b8d4f0", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.06em" }}>{L.consultHowTitle}</div>
+                  {L.consultSteps.map(([t, d], i) => (
+                    <div key={i} style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+                      <span style={{ flex: "none", width: "22px", height: "22px", borderRadius: "50%", border: `1.5px solid ${CYAN}`, color: CYAN, fontSize: "12px", fontWeight: "700", display: "flex", alignItems: "center", justifyContent: "center" }}>{i + 1}</span>
+                      <p style={{ margin: 0, fontSize: "13px", lineHeight: 1.55, color: "#d6e6f5" }}><strong style={{ color: "#ffffff" }}>{t}:</strong> {d}</p>
+                    </div>
+                  ))}
                 </div>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "12px" }}>
                   <span style={{ fontSize: "20px", fontWeight: "800", color: CYAN }}>{ctaConfig.consultPrice}</span>
